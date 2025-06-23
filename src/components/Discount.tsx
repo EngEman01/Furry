@@ -16,7 +16,7 @@ const Discount = () => {
                         <p className='text-lg mb-4'>
                             Just Sign Up & Register it now to become member.
                         </p>
-                        <input type="text" placeholder='Email' className='w-full h-11 border-1 border-gray-400 rounded-md mb-3 p-3'/>
+                        <input type="text" placeholder='Email' className='w-full h-11 border-1 border-gray-400 rounded-md mb-3 p-3' required/>
                         <button className='w-full h-11 bg-[#212529] text-white p-2 rounded-lg'>
                             Subscribe
                         </button>
