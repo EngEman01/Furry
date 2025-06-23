@@ -11,7 +11,7 @@ import { MdOutlinePets } from "react-icons/md";
 const navSaller = () => {
     return (
         <>
-            <div className='max-w-6xl mx-auto flex justify-center items-center' style={{ width: '30%' }}>
+            <div className='max-w-6xl mx-auto flex justify-center items-start' style={{ width: '30%' }}>
                 <nav>
                     <ul>
                         <li className='flex justify-start items-center mb-6 text-gray-600 p-2 rounded-lg hover:bg-[#76accd] hover:text-white'>
