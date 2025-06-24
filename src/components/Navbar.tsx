@@ -23,14 +23,14 @@ const Navbar = () => {
                 <div>
                     <div className='w-full bg-white flex justify-center items-center p-2'>
                         <ul className='flex justify-between items-center max-w-6xl'>
-                            <li className='mx-4 '>Home</li>
-                            <li className='mx-4 '>All Products</li>
-                            <li className='mx-4 '>Free Delivery</li>
-                            <li className='mx-4 '>Blog</li>
-                            <li className='mx-4 '>Shop</li>
-                            <li className='mx-4 '>Offers</li>
-                            <li className='mx-4 '>Sale</li>
-                            <li className='mx-4 '>Pages</li>
+                            <li className='mx-4 text-gray-500'>Home</li>
+                            <li className='mx-4 text-gray-500'>All Products</li>
+                            <li className='mx-4 text-gray-500'>Free Delivery</li>
+                            <li className='mx-4 text-gray-500'>Blog</li>
+                            <li className='mx-4 text-gray-500'>Shop</li>
+                            <li className='mx-4 text-gray-500'>Offers</li>
+                            <li className='mx-4 text-gray-500'>Sale</li>
+                            <li className='mx-4 text-gray-500'>Pages</li>
                             <li className='mx-4 text-red-500'>Get PRO</li>
                         </ul>
                     </div>
