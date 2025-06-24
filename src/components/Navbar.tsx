@@ -13,9 +13,9 @@ const Navbar = () => {
                     <div className='searchSection w-full'>
                         <input type="text" placeholder='Search for more than 20,000 products' className='w-full h-12 p-4 bg-gray-200 rounded-lg' />
                     </div>
-                    <div className='userNeed w-full flex justify-center items-center'>
-                        <FaRegUserCircle className='inline mx-2' size={24} />
-                        <FaBasketShopping className='inline mx-2' size={24} />
+                    <div className='userNeed w-full flex justify-center items-center text-[#76accd]'>
+                        <FaRegUserCircle className='inline mx-2' size={30} />
+                        <FaBasketShopping className='inline mx-2' size={30} />
                     </div>
                 </div>
 

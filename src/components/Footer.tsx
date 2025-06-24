@@ -8,7 +8,7 @@ const Footer = () => {
             <div className='w-full bg-black p-10 text-white flex flex-col justify-between items-center' style={{ fontFamily: 'cursive' }}>
 
 
-                <div className='w-full flex justify-center items-start p-10'>
+                <div className='w-full flex justify-around items-start p-10 gap-6 flex-col sm:flex-col md:flex-row'>
 
                     <div className='furry-logo w-full'>
                         <Image src="/logo.svg" alt="furry logo" width={160} height={160} />                        <div className="social-links mt-5 ml-2 flex items-center justify-start">
@@ -60,7 +60,7 @@ const Footer = () => {
 
                 <div>
                     <div className='copy-right'>
-                        <h4>copy rights</h4>
+                        <h4 className='text-gray-500'>© 2025 Furry. All rights reserved.</h4>
 
                     </div>
 
