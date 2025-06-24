@@ -11,7 +11,8 @@ const Footer = () => {
                 <div className='w-full flex justify-around items-start p-10 gap-6 flex-col sm:flex-col md:flex-row'>
 
                     <div className='furry-logo w-full'>
-                        <Image src="/logo.svg" alt="furry logo" width={160} height={160} />                        <div className="social-links mt-5 ml-2 flex items-center justify-start">
+                        <Image src="/logo.svg" alt="furry logo" width={160} height={160} />
+                        <div className="social-links mt-5 ml-2 flex items-center justify-start">
                             <FaFacebookF className='text-gray-500 text-3xl mr-2' />
                             <FaTwitter className='text-gray-500 text-3xl mr-2' />
                             <FaYoutube className='text-gray-500 text-3xl mr-2' />
@@ -21,37 +22,37 @@ const Footer = () => {
                         </div>
                     </div>
                     <div className='furry-shop w-full'>
-                        <h2 className='font-bold'>Shop</h2>
+                        <h2 className='font-bold mb-3'>Shop</h2>
                         <ul className='text-gray-400 text-sm mr-2'>
-                            <li>About Us</li>
-                            <li>Conditions</li>
-                            <li>Our Journals</li>
-                            <li>Careers</li>
-                            <li>Affiliate Programme</li>
-                            <li>Ultras Press</li>
+                            <li><a href="#" className="mb-2 block hover:underline">About Us</a></li>
+                            <li><a href="#" className="mb-2 block hover:underline">Conditions</a></li>
+                            <li><a href="#" className="mb-2 block hover:underline">Our Journals</a></li>
+                            <li><a href="#" className="mb-2 block hover:underline">Careers</a></li>
+                            <li><a href="#" className="mb-2 block hover:underline">Affiliate Programme</a></li>
+                            <li><a href="#" className="mb-2 block hover:underline">Ultras Press</a></li>
                         </ul>
 
                     </div>
                     <div className='furry-links w-full'>
-                        <h2 className='font-bold'>Quick Links</h2>
+                        <h2 className='font-bold mb-3'>Quick Links</h2>
                         <ul className='text-gray-400 text-sm mr-2'>
-                            <li>Offers</li>
-                            <li>Conditions</li>
-                            <li>Our Journals</li>
-                            <li>Careers</li>
-                            <li>Affiliate Programme</li>
-                            <li>Ultras Press</li>
+                            <li><a href="#" className="mb-2 block hover:underline">Offers</a></li>
+                            <li><a href="#" className="mb-2 block hover:underline">Conditions</a></li>
+                            <li><a href="#" className="mb-2 block hover:underline">Our Journals</a></li>
+                            <li><a href="#" className="mb-2 block hover:underline">Careers</a></li>
+                            <li><a href="#" className="mb-2 block hover:underline">Affiliate Programme</a></li>
+                            <li><a href="#" className="mb-2 block hover:underline">Ultras Press</a></li>
                         </ul>
                     </div>
                     <div className='furry-services w-full'>
-                        <h2 className='font-bold'>Customer Service</h2>
+                        <h2 className='font-bold mb-3'>Customer Service</h2>
                         <ul className='text-gray-400 text-sm mr-2'>
-                            <li>FAQ</li>
-                            <li>Contact</li>
-                            <li>Privacy Policy</li>
-                            <li>Returns & Refunds</li>
-                            <li>Cookie Guidelines</li>
-                            <li>Delivery Information</li>
+                            <li><a href="#" className="mb-2 block hover:underline">FAQ</a></li>
+                            <li><a href="#" className="mb-2 block hover:underline">Contact</a></li>
+                            <li><a href="#" className="mb-2 block hover:underline">Privacy Policy</a></li>
+                            <li><a href="#" className="mb-2 block hover:underline">Returns & Refunds</a></li>
+                            <li><a href="#" className="mb-2 block hover:underline">Cookie Guidelines</a></li>
+                            <li><a href="#" className="mb-2 block hover:underline">Delivery Information</a></li>
                         </ul>
                     </div>
 
