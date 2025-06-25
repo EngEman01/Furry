@@ -1,40 +1,49 @@
+
 import Image from 'next/image';
-import React from 'react'
+import React from 'react';
 import { FaRegUserCircle } from 'react-icons/fa';
 import { FaBasketShopping } from "react-icons/fa6";
+import ModalLogin from './auth/modalLogin'; // Assuming you have a ModalLogin component
+import Link from 'next/link';
 
 const Navbar = () => {
+
+
     return (
         <>
             <div className='relative z-50'>
                 <div className='w-full bg-white flex justify-between items-center p-4'>
                     <div className='logoSection w-full flex justify-center items-center'>
-                        <Image src="/logo.svg" alt="furry logo" width={200} height={200}/>                </div>
+                        <Link href="/">
+                        <Image src="/logo.svg" alt="furry logo" width={200} height={200} />   
+                        </Link>             </div>
                     <div className='searchSection w-full'>
                         <input type="text" placeholder='Search for more than 20,000 products' className='w-full h-12 p-4 bg-gray-200 rounded-lg' />
                     </div>
                     <div className='userNeed w-full flex justify-center items-center text-[#76accd]'>
-                        <FaRegUserCircle className='inline mx-2' size={30} />
+                        {/* <FaRegUserCircle className='inline mx-2' size={30} /> */}
+                        <ModalLogin />
                         <FaBasketShopping className='inline mx-2' size={30} />
                     </div>
-                </div>
 
 
-                <div>
-                    <div className='w-full bg-white flex justify-center items-center p-2'>
-                        <ul className='flex justify-between items-center max-w-6xl'>
-                            <li className='mx-4 text-gray-500'>Home</li>
-                            <li className='mx-4 text-gray-500'>All Products</li>
-                            <li className='mx-4 text-gray-500'>Free Delivery</li>
-                            <li className='mx-4 text-gray-500'>Blog</li>
-                            <li className='mx-4 text-gray-500'>Shop</li>
-                            <li className='mx-4 text-gray-500'>Offers</li>
-                            <li className='mx-4 text-gray-500'>Sale</li>
-                            <li className='mx-4 text-gray-500'>Pages</li>
-                            <li className='mx-4 text-red-500'>Get PRO</li>
-                        </ul>
-                    </div>
                 </div>
+
+                {/* Navigation Links */}
+                <div className='w-full bg-white flex justify-center items-center p-2'>
+                    <ul className='flex justify-between items-center max-w-6xl'>
+                        <li className='mx-4 text-gray-500'><Link href="/">Home</Link></li>
+                        <li className='mx-4 text-gray-500'><Link href="/">All Products</Link></li>
+                        <li className='mx-4 text-gray-500'><Link href="/">Free Delivery</Link></li>
+                        <li className='mx-4 text-gray-500'><Link href="/">Blog</Link></li>
+                        <li className='mx-4 text-gray-500'><Link href="/">Shop</Link></li>
+                        <li className='mx-4 text-gray-500'><Link href="/">Offers</Link></li>
+                        <li className='mx-4 text-gray-500'><Link href="/">Sale</Link></li>
+                        <li className='mx-4 text-gray-500'><Link href="/">Pages</Link></li>
+                        <li className='mx-4 text-red-500'><Link href="/">Get PRO</Link></li>
+                    </ul>
+                </div>
+
             </div>
         </>
     )

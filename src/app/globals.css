@@ -18,7 +18,7 @@ body {
 
 .sliderSection {
   width: 100%;
-  height: 90vh;
+  height: 80vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -36,4 +36,11 @@ body {
   background-position: center;
   background-attachment: fixed;
   position: relative;
+}
+
+.custom-basket-icon svg {
+  cursor: pointer;
+  fill: #76accd !important;
+  color: #76accd !important;
+  stroke: #76accd !important;
 }
