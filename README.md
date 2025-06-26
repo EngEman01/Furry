@@ -1,36 +1,102 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🐾 Pet Market – Full-Stack Pet Marketplace
 
-## Getting Started
+**Pet Market** is a full-stack web application for buying and selling pets in Egypt.  
+Built with **Next.js 14**, **PostgreSQL**, and **Prisma ORM**, it delivers a fast, accessible, and responsive experience with a clean modular structure.
 
-First, run the development server:
+---
+
+## 🧩 Features
+
+- 🛍️ **Pet Listings** – Browse pets with dynamic filtering
+- 🚚 **Free Delivery** – View only pets eligible for free delivery
+- 📰 **Blog** – Articles on pet care & education
+- 🎁 **Offers** – Highlighted deals and promotions
+- 🧱 **Modular UI** – Reusable components across the site
+- 📱 **Fully Responsive** – Optimized for all devices
+- ♿ **Accessible Design** – Follows basic a11y principles
+- ⭐ **Get PRO** *(Coming Soon)* – Premium features for sellers
+- 👤 **Dashboard** *(Planned)* – User area to manage listings
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer       | Tools Used                                  |
+|-------------|---------------------------------------------|
+| Frontend    | Next.js 14, React, Tailwind CSS             |
+| Backend     | PostgreSQL, Prisma ORM, API Routes          |
+| Utilities   | Git, GitHub, TypeScript                     |
+| Dev Tools   | ESLint, Prettier                            |
+
+---
+
+## 📂 Folder Structure
+
+pet-market/
+├── app/
+│ ├── shop/
+│ ├── blog/
+│ ├── free-delivery/
+│ ├── offers/
+│ ├── about/
+│ └── layout.tsx
+├── components/
+│ ├── ui/
+│ └── PetCard.tsx
+├── lib/
+│ └── prisma.ts
+├── prisma/
+│ ├── schema.prisma
+│ └── seed.ts
+└── public/
+
+yaml
+Copy
+Edit
+
+---
+
+## 🚀 Getting Started
 
 ```bash
+git clone https://github.com/EngEman01/Furry.git
+cd Furry
+npm install
+npx prisma generate
+npx prisma db push
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+🔑 Create a .env file with:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+🎯 Project Objectives
+Build a real-world full-stack project using modern tools
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Practice modular and scalable code organization
 
-## Learn More
+Apply data fetching with Prisma + PostgreSQL
 
-To learn more about Next.js, take a look at the following resources:
+Create a clean, responsive, and accessible UI
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+🧠 Future Enhancements
+🔐 Authentication & role-based access
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+🛒 Add to cart & checkout (Stripe integration)
 
-## Deploy on Vercel
+🛠️ Admin dashboard for content control
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+🌍 Multi-language support (i18n)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+📈 Analytics & engagement tracking
+
+🌐 Live Demo
+Coming soon on Vercel
+
+👩‍💻 Developed by
+Eman Mohamed Ragab
+Frontend Developer – React / Next.js
+📍 Cairo, Egypt
+📧 eman.m22omer@gmail.com
+GitHub • LinkedIn
+
+📄 License
+This project is open-source and licensed under the MIT License.
