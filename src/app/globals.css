@@ -44,3 +44,11 @@ body {
   color: #76accd !important;
   stroke: #76accd !important;
 }
+
+.AboutSection {
+  background: url('../../public/pets/pexels-pixabay-257540.jpg') no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  position: relative;
+}

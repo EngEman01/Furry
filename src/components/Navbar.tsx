@@ -33,14 +33,13 @@ const Navbar = () => {
                 <div className='w-full bg-white flex justify-center items-center p-2'>
                     <ul className='flex justify-between items-center max-w-6xl'>
                         <li className='mx-4 text-gray-500'><Link href="/">Home</Link></li>
-                        <li className='mx-4 text-gray-500'><Link href="/">All Products</Link></li>
-                        <li className='mx-4 text-gray-500'><Link href="/">Free Delivery</Link></li>
-                        <li className='mx-4 text-gray-500'><Link href="/">Blog</Link></li>
-                        <li className='mx-4 text-gray-500'><Link href="/">Shop</Link></li>
-                        <li className='mx-4 text-gray-500'><Link href="/">Offers</Link></li>
-                        <li className='mx-4 text-gray-500'><Link href="/">Sale</Link></li>
-                        <li className='mx-4 text-gray-500'><Link href="/">Pages</Link></li>
-                        <li className='mx-4 text-red-500'><Link href="/">Get PRO</Link></li>
+                        <li className='mx-4 text-gray-500'><Link href="/about">About</Link></li>
+                        <li className='mx-4 text-gray-500'><Link href="/AllPets">All Products</Link></li>
+                        <li className='mx-4 text-gray-500'><Link href="/free-dlivery">Free Delivery</Link></li>
+                        <li className='mx-4 text-gray-500'><Link href="/blog">Blog</Link></li>
+                        {/* <li className='mx-4 text-gray-500'><Link href="/shop">Shop</Link></li> */}
+                        <li className='mx-4 text-gray-500'><Link href="/offers">Offers</Link></li>
+                        <li className='mx-4 text-red-500'><Link href="/get-pro">Get PRO</Link></li>
                     </ul>
                 </div>
 
