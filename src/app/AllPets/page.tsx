@@ -5,25 +5,44 @@ import AllPetsCards from '@/components/AllPetsCards';
 const page = () => {
   return (
     <>
-                <div className='w-full bg-white flex justify-center items-center p-6 mt-7 flex-col sm:flex-col md:flex-row'>
+      <div className='w-full bg-white flex justify-center items-center p-6 mt-7 flex-col sm:flex-col md:flex-row'>
 
-                <NavSaller />
+        <NavSaller />
 
-                <div className='w-full flex items-center justify-center flex-col'>
+        <div className='w-full flex items-center justify-center flex-col'>
 
-                    <div className='headerBest flex items-center justify-between mb-6' style={{ width: '75%' }}>
+          <div className='headerBest flex items-center justify-between mb-6' style={{ width: '75%' }}>
 
-                        <h1 className='text-5xl mb-6' style={{ fontFamily: '"Chewy", system-ui' }}>Best selling products </h1>
-                        <button className='bg-[#76accd] text-white p-2 rounded-lg'>View all</button>
+            <h1 className='text-5xl mb-6' style={{ fontFamily: '"Chewy", system-ui' }}>Best selling products </h1>
+            <button className='bg-[#76accd] text-white p-2 rounded-lg'>View all</button>
 
-                    </div>
+          </div>
 
-                    <div className="cards grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" style={{ width: '80%' }}>
+          <div className="cards grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" style={{ width: '80%' }}>
 
-                        <AllPetsCards />
-                    </div>
-                </div>
+            <AllPetsCards />
+          </div>
+
+          <div className="flex justify-center items-center" style={{ width: '80%' }}>
+
+            <button>
+              prev
+            </button>
+
+            <div>
+              <span className=''>1</span>
+              <span className=''>2</span>
+              <span className=''>3</span>
+              <span className=''>4</span>
             </div>
+            
+            <button>
+              next
+            </button>
+
+          </div>
+        </div>
+      </div>
     </>
   )
 }
