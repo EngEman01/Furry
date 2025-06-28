@@ -1,5 +1,5 @@
 import React from 'react'
-import PestsCards from './Best Saller/petsCard';
+import PestsCards from '../Best Saller/petsCard';
 
 const newArrivals = () => {
     return (

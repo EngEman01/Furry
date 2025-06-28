@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react'
 import { pests } from '@/utils/types';
 import { FaShoppingCart } from "react-icons/fa";
 
-const PetsCard = () => {
+const AllPetsCard = () => {
     const [petList, setPetList] = useState<pests[]>([]);
     // Store count per pet id
     const [counts, setCounts] = useState<{ [id: number]: number }>({});
@@ -30,7 +30,7 @@ const PetsCard = () => {
 
     return (
         <>
-            {petList.slice(0, 6).map(pet => (
+            {petList.map(pet => (
                 <div className='card' key={pet.id}>
                     <img src={pet.image} alt="Best Sale 1" className='w-full h-80 rounded-lg' />
                     <h3 className='mt-4 font-bold'>{pet.name}</h3>
@@ -55,4 +55,4 @@ const PetsCard = () => {
     )
 }
 
-export default PetsCard
+export default AllPetsCard

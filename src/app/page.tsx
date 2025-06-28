@@ -1,10 +1,10 @@
-import  HeroSection  from "@/components/heroSection";
+import  HeroSection  from "@/components/Hero Section/heroSection";
 import BestSall from "@/components/Best Saller/bestSall";
-import CustomersReviews from "@/components/customersReviews";
-import NewArrivals from "@/components/newArrivals";
-import Support from "@/components/support";
-import Discount from "@/components/Discount";
-import Blog from "@/components/blog";
+import CustomersReviews from "@/components/Hero Section/customersReviews";
+import NewArrivals from "@/components/Hero Section/newArrivals";
+import Support from "@/components/Hero Section/support";
+import Discount from "@/components/Hero Section/Discount";
+import Blog from "@/components/Hero Section/blog";
 
 
 export default function Home() {

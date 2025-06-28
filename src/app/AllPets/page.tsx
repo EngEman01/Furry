@@ -1,6 +1,6 @@
 import React from 'react'
 import NavSaller from '@/components/Best Saller/navSaller';
-import PetsCards from '@/components/Best Saller/petsCard';
+import AllPetsCards from '@/components/AllPetsCards';
 
 const page = () => {
   return (
@@ -20,7 +20,7 @@ const page = () => {
 
                     <div className="cards grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" style={{ width: '80%' }}>
 
-                        <PetsCards />
+                        <AllPetsCards />
                     </div>
                 </div>
             </div>
