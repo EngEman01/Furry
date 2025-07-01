@@ -1,4 +1,4 @@
-export type pests ={
+export type pet ={
     id: number;
     name: string;
     image: string;

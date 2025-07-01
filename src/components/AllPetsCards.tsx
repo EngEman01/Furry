@@ -1,11 +1,12 @@
 "use client";
 
 import React, { useState, useEffect } from 'react'
-import { pests } from '@/utils/types';
-import { FaShoppingCart } from "react-icons/fa";
+import { pet } from '@/utils/types';
+import { MdOutlinePets } from "react-icons/md";
+import Link from 'next/link';
 
 const AllPetsCard = () => {
-    const [petList, setPetList] = useState<pests[]>([]);
+    const [petList, setPetList] = useState<pet[]>([]);
     // Store count per pet id
     const [counts, setCounts] = useState<{ [id: number]: number }>({});
 
@@ -22,7 +23,7 @@ const AllPetsCard = () => {
             if (!response.ok) {
                 throw new Error('Failed to fetch data');
             }
-            const Pets: pests[] = await response.json();
+            const Pets: pet[] = await response.json();
             setPetList(Pets);
         };
         fetchPets();
@@ -44,10 +45,10 @@ const AllPetsCard = () => {
                         <button onClick={() => handleAddToPets(pet.id)} className='border-1 border-gray-500 w-7 h-7 p-2 flex items-center justify-center'>+</button>
                     </div>
                     <div className="addCard flex items-center justify-center">
-                        <button className='bg-[#76accd] text-white p-2 rounded-lg mt-2 flex items-center justify-center' style={{ width: '50%' }}>
-                            <FaShoppingCart className='inline mr-2' size={20} />
-                            Add to Cart
-                        </button>
+                        <Link href={`/pets/${pet.id}`} className='bg-[#76accd] text-white p-2 rounded-lg mt-2 flex items-center justify-center' style={{ width: '50%' }}>
+                            Know More
+                            <MdOutlinePets className='inline ml-2' size={20} />
+                        </Link>
                     </div>
                 </div>
             ))}

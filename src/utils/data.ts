@@ -1,7 +1,7 @@
-import { pests } from "./types";
+import { pet } from "./types";
 
 
-export const Pets : pests[] = [
+export const Pets : pet[] = [
     {
         id: 1,
         name: "Dog Food",

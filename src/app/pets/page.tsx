@@ -1,11 +1,20 @@
 import React from 'react'
 import NavSaller from '@/components/Best Saller/navSaller';
 import AllPetsCards from '@/components/AllPetsCards';
+import Pagination from './Pagination'
 
-const page = () => {
+
+
+const page = async () => {
+
+
+
+  await new Promise((resolve) => setTimeout(resolve, 5000))
+
+
   return (
     <>
-      <div className='w-full bg-white flex justify-center items-center p-6 mt-7 flex-col sm:flex-col md:flex-row'>
+      <div className='w-full flex justify-center items-center p-6 mt-7 flex-col sm:flex-col md:flex-row'>
 
         <NavSaller />
 
@@ -23,24 +32,7 @@ const page = () => {
             <AllPetsCards />
           </div>
 
-          <div className="flex justify-center items-center" style={{ width: '80%' }}>
-
-            <button>
-              prev
-            </button>
-
-            <div>
-              <span className=''>1</span>
-              <span className=''>2</span>
-              <span className=''>3</span>
-              <span className=''>4</span>
-            </div>
-            
-            <button>
-              next
-            </button>
-
-          </div>
+          <Pagination />
         </div>
       </div>
     </>

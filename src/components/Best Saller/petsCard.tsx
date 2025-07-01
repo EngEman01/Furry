@@ -1,11 +1,11 @@
 "use client";
 
 import React, { useState, useEffect } from 'react'
-import { pests } from '@/utils/types';
+import { pet } from '@/utils/types';
 import { FaShoppingCart } from "react-icons/fa";
 
 const PetsCard = () => {
-    const [petList, setPetList] = useState<pests[]>([]);
+    const [petList, setPetList] = useState<pet[]>([]);
     // Store count per pet id
     const [counts, setCounts] = useState<{ [id: number]: number }>({});
 
@@ -22,7 +22,7 @@ const PetsCard = () => {
             if (!response.ok) {
                 throw new Error('Failed to fetch data');
             }
-            const Pets: pests[] = await response.json();
+            const Pets: pet[] = await response.json();
             setPetList(Pets);
         };
         fetchPets();
