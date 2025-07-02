@@ -1,69 +1,106 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { Pets } from '@/utils/data';
 import { UpdateNewPetsDto } from '@/utils/dtos'
-import { pet } from '@/utils/types';
+import prisma from '@/utils/db'
+
 
 interface GetProps {
-    params: { id: string }
+    params: { petId: string } // this id name should be the same as the file name [petId]
 }
 
 /***
  * @method GET
- * @route  ~/api/pets/:id
- * @des    Get Single Pet By id
+ * @route  ~/api/pets/:petId
+ * @des    Get Single Pet By petId
  * @access public
 */
 
-export function GET(request: NextRequest, { params }: GetProps) {
-    const pet = Pets.find(a => a.id === parseInt(params.id))
+export async function GET(request: NextRequest, { params }: GetProps) {
+    try {
+        const pet = await prisma.pets.findUnique({ where: { id: parseInt(params.petId) } })
 
-    if (!pet) {
-        return NextResponse.json({ message: "pet not found" }, { status: 404 })
+        if (!pet) {
+            return NextResponse.json({ message: "pet not found" }, { status: 404 })
+        }
+
+        return NextResponse.json(pet, { status: 200 })
+    }
+    catch (error) {
+        return NextResponse.json(
+            { message: 'internal server error', error: String(error) },
+            { status: 500 }
+        )
     }
 
-    return NextResponse.json(pet, { status: 200 })
-
 }
- 
+
 
 /***
  * @method PUT
- * @route  ~/api/pets/:id
- * @des    Update Pets By id
+ * @route  ~/api/pets/:petId
+ * @des    Update Pets By petId
  * @access public
 */
 
 export async function PUT(request: NextRequest, { params }: GetProps) {
-    const pet = Pets.find(a => a.id === parseInt(params.id))
 
-    if (!pet) {
-        return NextResponse.json({ message: "pet not found" }, { status: 404 })
+    try {
+        const pet = await prisma.pets.findUnique({ where: { id: parseInt(params.petId) } })
+
+        if (!pet) {
+            return NextResponse.json({ message: "pet not found" }, { status: 404 })
+        }
+
+        const body = (await request.json()) as UpdateNewPetsDto;
+
+        const UpdatedPets = await prisma.pets.update({
+            where: { id: parseInt(params.petId) },
+            data: {
+                name: body.name,
+                type: body.type,
+                image: body.image,
+                description: body.description,
+                price: body.price,
+                freeDelivery: body.freeDelivery,
+                offer: body.offer
+            }
+        })
+
+
+        return NextResponse.json(UpdatedPets, { status: 200 })
+    }
+    catch (error) {
+        return NextResponse.json(
+            { message: "internal server error", error: String(error) },
+            { status: 500 }
+        )
     }
 
-    const body = (await request.json()) as UpdateNewPetsDto;
-
-    console.log(body);
-
-
-    return NextResponse.json({ message : "Pet Updated"}, { status: 200 })
-
-} 
+}
 
 /***
  * @method DELETE
- * @route  ~/api/pets/:id
- * @des    Delete Pets By id
+ * @route  ~/api/pets/:petId
+ * @des    Delete Pets By petId
  * @access public
 */
 
 export async function DELETE(request: NextRequest, { params }: GetProps) {
-    const pet = Pets.find(a => a.id === parseInt(params.id))
+    try {
+        const pet = await prisma.pets.findUnique({ where: { id: parseInt(params.petId) } })
 
-    if (!pet) {
-        return NextResponse.json({ message: "pet not found" }, { status: 404 })
+        if (!pet) {
+            return NextResponse.json({ message: "pet not found" }, { status: 404 })
+        }
+
+        await prisma.pets.delete({ where: { id: parseInt(params.petId) } })
+
+        return NextResponse.json({ message: "Pet Deleted" }, { status: 200 })
+
     }
-
-
-    return NextResponse.json({messga : "Pet Deleted"}, { status: 200 })
-
-} 
+    catch (error) {
+        return NextResponse.json(
+            { message: 'internal server error', error: String(error) },
+            { status: 500 }
+        )
+    }
+}

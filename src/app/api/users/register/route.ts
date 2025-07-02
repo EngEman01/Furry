@@ -1,10 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { CreateNewUsers } from '@/utils/dtos'
-import { PrismaClient } from '@prisma/client'
 import { createUserSchema } from '@/utils/validationSchemas'
-
-
-const prisma = new PrismaClient();
+import prisma from '@/utils/db'
+import { User } from "@/generated/prisma";
 
 /***
  * @method POST
@@ -21,23 +19,38 @@ export async function POST(request: NextRequest) {
         // validation using zod 
         const validation = createUserSchema.safeParse(body)
 
-        if(!validation.success){ return NextResponse.json(
-                    { message: validation.error.errors[0].message },
-                    { status: 400 }
-        )}
+        if (!validation.success) {
+            return NextResponse.json(
+                { message: validation.error.errors[0].message },
+                { status: 400 }
+            )
+        }
 
-        // const NewUser: User = {
-        //     username: body.username,
-        //     email: body.email,
-        //     password: body.password,
-        //     id: User.length + 1
-        // }
+        const user = await prisma.user.findUnique({ where: { email: body.email } });
 
-        //     return NextResponse.json(
-        //     { message: "user created" },
-        //     { status: 200 }
+        if(user){
+            return NextResponse.json(
+                {message: "this user already registered"},
+                {status: 400 }
+            )
+        }
 
-        // )
+        const NewUser = await prisma.user.create({
+
+            data: {
+                username: body.username,
+                phone: body.phone,
+                email: body.email,
+                password: body.password,
+            }
+
+        });
+
+        return NextResponse.json(
+            { message: "user created" },
+            { status: 201 }
+
+        )
 
     } catch (error) {
         return NextResponse.json(

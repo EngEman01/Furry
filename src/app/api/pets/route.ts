@@ -1,14 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { Pets } from '@/utils/data';
-import { pet } from '@/utils/types';
 import { CreateNewPetsDto } from '@/utils/dtos'
 import { createPetsSchema } from '@/utils/validationSchemas'
-
-
-import { PrismaClient } from '@prisma/client'
-
-const prisma = new PrismaClient();
-
+import prisma from '@/utils/db'
+import { Pets } from '@/generated/prisma';
 
 /***
  * @method GET
@@ -17,11 +11,18 @@ const prisma = new PrismaClient();
  * @access public
 */
 
-export function GET(request: NextRequest): NextResponse<pet[]> {
-    return NextResponse.json(Pets, { status: 200 });
+export async function GET(request: NextRequest) {
+    try {
+        const pets = await prisma.pets.findMany();
+        return NextResponse.json(pets, { status: 200 });
+    } catch (error) {
+        console.error('GET /api/pets error:', error);
+        return NextResponse.json(
+            { message: "internal server error", error: String(error) },
+            { status: 500 }
+        );
+    }
 }
-
-
 
 /***
  * @method POST
@@ -31,26 +32,37 @@ export function GET(request: NextRequest): NextResponse<pet[]> {
 */
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
-    const body = (await request.json()) as CreateNewPetsDto;
+    try {
+        const body = (await request.json()) as CreateNewPetsDto;
 
+        const validation = createPetsSchema.safeParse(body);
 
+        if (!validation.success) {
+            return NextResponse.json({ message: validation.error.errors[0].message }, { status: 400 });
+        }
+        
+        const newPets: Pets = await prisma.pets.create({
+            data: {
+                name: body.name,
+                type: body.type,
+                image: body.image,
+                description: body.description,
+                price: body.price,
+                freeDelivery: body.freeDelivery,
+                offer: body.offer
+            }
+        });
 
-    const validation = createPetsSchema.safeParse(body)
+        return NextResponse.json(
+            { message: 'Pet Created' },
+            { status: 201 }
+        );
 
-    if(!validation.success){
-        return NextResponse.json({ message: validation.error.errors[0].message }  , {status : 400 })
+    } catch (error) {
+        console.error('POST /api/pets error:', error);
+        return NextResponse.json(
+            { message: "internal server error", error: String(error) },
+            { status: 500 }
+        );
     }
-
-    const newPets: pet = {
-        name: body.name,
-        image: body.image,
-        description: body.description,
-        price: body.price,
-        freeDelivery: body.freeDelivery,
-        offer: body.offer,
-        id: Pets.length + 1
-    }
-
-    Pets.push(newPets);
-    return NextResponse.json(newPets, { status: 201 })
 }

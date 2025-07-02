@@ -1,12 +1,14 @@
 // Dto => Data Transfer Object
+
 // in this file => I write a New Interfaces to Use it in GET and POST Operations
 
-////////////////////////////////////////// Pets /////////////////////////////
+//////////////////////////////////////////////////// Pets ///////////////////////////////////////////////////////////
 
 
 //Create New Pets
 export interface CreateNewPetsDto {
     name: string;
+    type: string;
     image: string;
     description: string;
     price: number;
@@ -19,6 +21,7 @@ export interface CreateNewPetsDto {
 // ? => it means that is Optional
 export interface UpdateNewPetsDto {
     name?: string;
+    type?: string;
     image?: string;
     description?: string;
     price?: number;
@@ -27,11 +30,22 @@ export interface UpdateNewPetsDto {
 }
 
 
-////////////////////////////////////////// Users /////////////////////////////
+//////////////////////////////////////////////////////////// Users //////////////////////////////////////////////////
 
 //Create New USer
 export interface CreateNewUsers {
     username:string,
+    phone:string,
     email:string,
     password:string 
+}
+
+
+//Update USer
+export interface UpdateUsers {
+    username?:string,
+    phone?:string,
+    email?:string,
+    password?:string 
+    isAdmin?:boolean
 }
