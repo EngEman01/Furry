@@ -11,7 +11,7 @@ interface GetParams {
 /***
  * @method GET
  * @route  ~/api/users/:id
- * @des    Get User by ID (Login / Sign in)
+ * @des    Get User by ID
  * @access public
 */
 

@@ -15,10 +15,14 @@ export const createPetsSchema = z.object({
 })
 
 
-
 export const createUserSchema = z.object({
     username: z.string().min(2).max(100),
     phone: z.string().min(11).max(100),
+    email: z.string().min(3).max(200).email(),
+    password: z.string().min(6)
+})
+
+export const loginUserSchema = z.object({
     email: z.string().min(3).max(200).email(),
     password: z.string().min(6)
 })

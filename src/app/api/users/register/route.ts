@@ -3,6 +3,7 @@ import { CreateNewUsers } from '@/utils/dtos'
 import { createUserSchema } from '@/utils/validationSchemas'
 import prisma from '@/utils/db'
 import { User } from "@/generated/prisma";
+import bcrypt from "bcryptjs";
 
 /***
  * @method POST
@@ -35,19 +36,25 @@ export async function POST(request: NextRequest) {
             )
         }
 
-        const NewUser = await prisma.user.create({
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(body.password, salt);
+
+        const NewUser: User = await prisma.user.create({
 
             data: {
                 username: body.username,
                 phone: body.phone,
                 email: body.email,
-                password: body.password,
+                password: hashedPassword,
             }
 
         });
 
+        const token = null;
+
         return NextResponse.json(
-            { message: "user created" },
+            // { message: "user created" },
+            { ...NewUser, token },
             { status: 201 }
 
         )

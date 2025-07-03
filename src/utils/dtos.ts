@@ -46,6 +46,12 @@ export interface UpdateUsers {
     username?:string,
     phone?:string,
     email?:string,
-    password?:string 
+    password?:string,
     isAdmin?:boolean
+}
+
+//Login to USer
+export interface LoginUsers {
+    email:string,
+    password:string
 }
