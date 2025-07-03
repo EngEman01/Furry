@@ -111,13 +111,6 @@ export async function DELETE(request: NextRequest, { params }: GetParams) {
 
         const authToken = request.headers.get('authToken') as string;
 
-        if (!authToken) {
-            return NextResponse.json(
-                { message: "no token provided, access denied" },
-                { status: 401 }
-            );
-        }
-
         const userFromToken = jwt.verify(authToken, process.env.JWT_SECRET as string) as JWTPayload;
 
         if (userFromToken.id === user.id) {
