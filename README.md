@@ -1,36 +1,40 @@
 # 🐾 Pet Market – Full-Stack Pet Marketplace
 
-**Pet Market** is a full-stack web application for buying and selling pets in Egypt.  
-Built with **Next.js 14**, **PostgreSQL**, and **Prisma ORM**, it delivers a fast, accessible, and responsive experience with a clean modular structure.
+**Pet Market** is a modern full-stack web application that allows users in Egypt to buy and sell pets online.  
+Built with **Next.js 15**, **PostgreSQL**, and **Prisma ORM**, it offers a performant, responsive, and accessible user experience through a clean, modular structure.
 
 ---
 
-## 🧩 Features
+## ✨ Features
 
-- 🛍️ **Pet Listings** – Browse pets with dynamic filtering
-- 🚚 **Free Delivery** – View only pets eligible for free delivery
-- 📰 **Blog** – Articles on pet care & education
-- 🎁 **Offers** – Highlighted deals and promotions
-- 🧱 **Modular UI** – Reusable components across the site
-- 📱 **Fully Responsive** – Optimized for all devices
-- ♿ **Accessible Design** – Follows basic a11y principles
-- ⭐ **Get PRO** *(Coming Soon)* – Premium features for sellers
-- 👤 **Dashboard** *(Planned)* – User area to manage listings
+- 🐶 **Pet Listings** – Browse pets with dynamic filters
+- 🚚 **Free Delivery Filter** – Easily find pets eligible for free delivery
+- 📰 **Pet Blog** – Educational content on pet care and awareness
+- 🎁 **Offers Section** – Highlighted deals and seasonal promotions
+- 🧩 **Modular UI** – Reusable and scalable components
+- 📱 **Fully Responsive** – Optimized for all screen sizes
+- ♿ **Accessible Design** – Follows basic accessibility (a11y) standards
+- ⭐ **Get PRO** *(Coming Soon)* – Premium features for professional sellers
+- 👤 **User Dashboard** *(Planned)* – Manage your own listings and favorites
 
 ---
 
 ## 🛠️ Tech Stack
 
-| Layer       | Tools Used                                  |
-|-------------|---------------------------------------------|
-| Frontend    | Next.js 14, React, Tailwind CSS             |
-| Backend     | PostgreSQL, Prisma ORM, API Routes          |
-| Utilities   | Git, GitHub, TypeScript                     |
-| Dev Tools   | ESLint, Prettier                            |
+
+| Layer       | Technologies Used                                              |
+|-------------|----------------------------------------------------------------|
+| Frontend    | Next.js 15, React 19, Tailwind CSS                             |
+| Backend     | API Routes (Next.js), Prisma ORM, PostgreSQL                   |
+| Auth & Utils| JSON Web Tokens (JWT), bcryptjs, zod validation                |
+| UI & UX     | React Icons, React Toastify                                    |
+| Dev Tools   | ESLint, TypeScript, Turbopack                                  |
 
 ---
 
-## 📂 Folder Structure
+---
+
+## 📁 Project Structure
 
 pet-market/
 ├── app/
@@ -58,6 +62,8 @@ Edit
 
 ## 🚀 Getting Started
 
+To run this project locally:
+
 ```bash
 git clone https://github.com/EngEman01/Furry.git
 cd Furry
@@ -65,38 +71,41 @@ npm install
 npx prisma generate
 npx prisma db push
 npm run dev
-🔑 Create a .env file with:
+Create a .env file in the root directory and add your PostgreSQL connection string:
 
+env
+Copy
+Edit
+DATABASE_URL="your_postgresql_connection_string"
+🎯 Project Goals
+Build a real-world full-stack application using modern web technologies
 
-🎯 Project Objectives
-Build a real-world full-stack project using modern tools
+Practice clean, modular, and scalable architecture
 
-Practice modular and scalable code organization
+Implement server-side data fetching with Prisma + PostgreSQL
 
-Apply data fetching with Prisma + PostgreSQL
+Create a responsive, accessible, and user-friendly UI
 
-Create a clean, responsive, and accessible UI
+🌱 Future Enhancements
+🔐 Authentication and Role-Based Access Control (RBAC)
 
-🧠 Future Enhancements
-🔐 Authentication & role-based access
+🛒 Shopping Cart and Checkout (Stripe Integration)
 
-🛒 Add to cart & checkout (Stripe integration)
+🛠️ Admin Dashboard for content & user management
 
-🛠️ Admin dashboard for content control
+🌍 Multi-language Support (i18n)
 
-🌍 Multi-language support (i18n)
-
-📈 Analytics & engagement tracking
+📊 Analytics & User Engagement Tracking
 
 🌐 Live Demo
-Coming soon on Vercel
+Coming soon – to be deployed on Vercel
 
-👩‍💻 Developed by
+👩‍💻 About the Developer
 Eman Mohamed Ragab
 Frontend Developer – React / Next.js
 📍 Cairo, Egypt
 📧 eman.m22omer@gmail.com
-GitHub • LinkedIn
+🔗 GitHub • LinkedIn
 
 📄 License
-This project is open-source and licensed under the MIT License.
+This project is open-source and available under the MIT License.
