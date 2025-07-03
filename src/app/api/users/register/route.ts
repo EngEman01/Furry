@@ -4,6 +4,8 @@ import { createUserSchema } from '@/utils/validationSchemas'
 import prisma from '@/utils/db'
 import { User } from "@/generated/prisma";
 import bcrypt from "bcryptjs";
+import { JWTPayload } from "@/utils/types";
+import { generateJWT } from "@/utils/generateToken";
 
 /***
  * @method POST
@@ -50,7 +52,14 @@ export async function POST(request: NextRequest) {
 
         });
 
-        const token = null;
+
+        const payload : JWTPayload={
+            id: NewUser.id,
+            username: NewUser.username,
+            isAdmin: NewUser.isAdmin
+        }
+
+        const token = generateJWT(payload);
 
         return NextResponse.json(
             // { message: "user created" },

@@ -3,6 +3,9 @@ import prisma from '@/utils/db';
 import { LoginUsers } from "@/utils/dtos";
 import { loginUserSchema } from "@/utils/validationSchemas";
 import bcrypt from "bcryptjs";
+import { generateJWT } from "@/utils/generateToken";
+import { JWTPayload } from "@/utils/types";
+
 
 /***
  * @method POST
@@ -42,17 +45,23 @@ export async function POST(request: NextRequest) {
             )
         }
 
-        const token = null;
+        const payload : JWTPayload = {
+            id: user.id,
+            username: user.username,
+            isAdmin: user.isAdmin
+        }
+
+        const token = generateJWT(payload);
 
         return NextResponse.json(
-            {message:"Authenticated successfully", token},
-            {status: 200}
+            { message: "Authenticated successfully", token },
+            { status: 200 }
         )
 
     }
     catch (error) {
         NextResponse.json(
-            { message: 'internal server error'},
+            { message: 'internal server error' },
             { status: 500 }
         )
     }

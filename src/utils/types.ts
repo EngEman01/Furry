@@ -7,3 +7,9 @@ export type pet ={
     freeDelivery: boolean;
     offer: number;
 }
+
+export type JWTPayload = {
+    id: number,
+    username: string,
+    isAdmin: boolean
+}

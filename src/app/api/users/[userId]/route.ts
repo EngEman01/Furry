@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from '@/utils/db';
 import { UpdateUsers } from "@/utils/dtos";
-
+import { JWTPayload } from "@/utils/types";
+import jwt from 'jsonwebtoken';
 
 
 interface GetParams {
@@ -92,12 +93,13 @@ export async function PUT(request: NextRequest, { params }: GetParams) {
 /***
  * @method DELETE
  * @route  ~/api/users/:id
- * @des    Delete User by ID
- * @access public
+ * @des    Delete User's Profile
+ * @access private
 */
 
 export async function DELETE(request: NextRequest, { params }: GetParams) {
     try {
+
         const user = await prisma.user.findUnique({ where: { id: parseInt(params.userId) } })
 
         if (!user) {
@@ -107,14 +109,31 @@ export async function DELETE(request: NextRequest, { params }: GetParams) {
             )
         }
 
-        await prisma.user.delete(
-            { where: { id: parseInt(params.userId) } }
-        )
+        const authToken = request.headers.get('authToken') as string;
+
+        if (!authToken) {
+            return NextResponse.json(
+                { message: "no token provided, access denied" },
+                { status: 401 }
+            );
+        }
+
+        const userFromToken = jwt.verify(authToken, process.env.JWT_SECRET as string) as JWTPayload;
+
+        if (userFromToken.id === user.id) {
+            await prisma.user.delete({ where: { id: parseInt(params.userId) }});
+
+            return NextResponse.json(
+                { message: 'user deleted successfully' },
+                { status: 200 }
+            )
+        }
 
         return NextResponse.json(
-            { message: 'user deleted successfully' },
-            { status: 200 }
+            { message: "only user himself can delete his profile, forbidden" },
+            { status: 403 }
         )
+
     }
     catch (error) {
         return NextResponse.json(
