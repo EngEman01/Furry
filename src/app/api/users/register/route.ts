@@ -5,7 +5,7 @@ import prisma from '@/utils/db'
 import { User } from "@/generated/prisma";
 import bcrypt from "bcryptjs";
 import { JWTPayload } from "@/utils/types";
-import { generateJWT } from "@/utils/generateToken";
+import { generateCookies } from "@/utils/generateToken";
 
 /***
  * @method POST
@@ -31,10 +31,10 @@ export async function POST(request: NextRequest) {
 
         const user = await prisma.user.findUnique({ where: { email: body.email } });
 
-        if(user){
+        if (user) {
             return NextResponse.json(
-                {message: "this user already registered"},
-                {status: 400 }
+                { message: "this user already registered" },
+                { status: 400 }
             )
         }
 
@@ -53,18 +53,21 @@ export async function POST(request: NextRequest) {
         });
 
 
-        const payload : JWTPayload={
+        const payload: JWTPayload = {
             id: NewUser.id,
             username: NewUser.username,
             isAdmin: NewUser.isAdmin
         }
 
-        const token = generateJWT(payload);
+        const cookie = generateCookies(payload);
 
         return NextResponse.json(
             // { message: "user created" },
-            { ...NewUser, token },
-            { status: 201 }
+            { ...NewUser, message: "user created successfully" },
+            {
+                status: 201,
+                headers: { "Set-Cookie": cookie }
+            }
 
         )
 

@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from '@/utils/db';
 import { UpdateUsers } from "@/utils/dtos";
-import { JWTPayload } from "@/utils/types";
-import jwt from 'jsonwebtoken';
+import { verifyToken } from "@/utils/verifyToken";
+
 
 
 interface GetParams {
@@ -97,7 +97,7 @@ export async function PUT(request: NextRequest, { params }: GetParams) {
  * @access private
 */
 
-export async function DELETE(request: NextRequest, { params }: GetParams) {
+export async function DELETE(request: NextRequest, { params }: GetParams){
     try {
 
         const user = await prisma.user.findUnique({ where: { id: parseInt(params.userId) } })
@@ -109,11 +109,13 @@ export async function DELETE(request: NextRequest, { params }: GetParams) {
             )
         }
 
-        const authToken = request.headers.get('authToken') as string;
+        // get data manual from request header
+        // const authToken = request.headers.get('authToken') as string;
 
-        const userFromToken = jwt.verify(authToken, process.env.JWT_SECRET as string) as JWTPayload;
+   
+        const userFromToken = verifyToken(request);
 
-        if (userFromToken.id === user.id) {
+        if (userFromToken !== null && userFromToken.id === user.id) {
             await prisma.user.delete({ where: { id: parseInt(params.userId) }});
 
             return NextResponse.json(

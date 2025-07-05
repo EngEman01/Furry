@@ -3,8 +3,9 @@ import prisma from '@/utils/db';
 import { LoginUsers } from "@/utils/dtos";
 import { loginUserSchema } from "@/utils/validationSchemas";
 import bcrypt from "bcryptjs";
-import { generateJWT } from "@/utils/generateToken";
+import { generateCookies } from "@/utils/generateToken";
 import { JWTPayload } from "@/utils/types";
+
 
 
 /***
@@ -45,17 +46,21 @@ export async function POST(request: NextRequest) {
             )
         }
 
-        const payload : JWTPayload = {
+        const payload: JWTPayload = {
             id: user.id,
             username: user.username,
             isAdmin: user.isAdmin
         }
 
-        const token = generateJWT(payload);
+        const cookie = generateCookies(payload);
 
         return NextResponse.json(
-            { message: "Authenticated successfully", token },
-            { status: 200 }
+            { message: "Authenticated successfully" },
+
+            {
+                status: 200,
+                headers: { "Set-Cookie": cookie }
+            }
         )
 
     }
