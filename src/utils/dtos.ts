@@ -54,3 +54,21 @@ export interface LoginUsers {
     email:string,
     password:string
 }
+
+
+//////////////////////////////////////////////////////////// Blogs //////////////////////////////////////////////////
+
+//Create New Blog
+export interface CreateNewBlogDto {
+    title: string,
+    description: string,
+    petId: number
+}
+
+
+//Update Blog
+export interface UpdateBlogDto {
+    title?: string,
+    description?: string,
+    petId?: number
+}

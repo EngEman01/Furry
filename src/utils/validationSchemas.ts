@@ -26,3 +26,9 @@ export const loginUserSchema = z.object({
     email: z.string().min(3).max(200).email(),
     password: z.string().min(6)
 })
+
+
+export const createBlogSchema = z.object({
+    title: z.string().min(2).max(100),
+    description: z.string().min(2)
+})
