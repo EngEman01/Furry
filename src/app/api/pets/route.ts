@@ -14,14 +14,6 @@ import { verifyToken } from '@/utils/verifyToken';
 
 export async function GET(request: NextRequest) {
     try {
-        const user = verifyToken(request);
-
-        if (user === null || user.isAdmin === false) {
-            return NextResponse.json(
-                { message: "only Admin can Get All Blog" },
-                { status: 403 }
-            )
-        }
         const pets = await prisma.pets.findMany();
         return NextResponse.json(pets, { status: 200 });
     } catch (error) {

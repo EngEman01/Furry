@@ -17,15 +17,6 @@ import { NextRequest, NextResponse } from "next/server";
 export async function GET(request: NextRequest) {
     try {
 
-        const user = verifyToken(request);
-
-        if (user === null || user.isAdmin === false) {
-            return NextResponse.json(
-                { message: "only Admin can Get All Blog" },
-                { status: 403 }
-            )
-        }
-
         const blog = await prisma.blog.findMany()
 
         return NextResponse.json(blog, { status: 200 })
