@@ -18,7 +18,16 @@ interface GetProps {
 export async function GET(request: NextRequest, { params }: GetProps) {
     try {
 
-        const pet = await prisma.pets.findUnique({ where: { id: parseInt(params.petId) } })
+        const pet = await prisma.pets.findUnique({
+             where: { id: parseInt(params.petId) },
+             include:{
+                blogs: {
+                    orderBy: {
+                        createdAt: 'desc'
+                    }
+                }
+             }
+            })
 
         if (!pet) {
             return NextResponse.json({ message: "pet not found" }, { status: 404 })
