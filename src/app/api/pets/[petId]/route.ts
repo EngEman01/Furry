@@ -17,14 +17,7 @@ interface GetProps {
 
 export async function GET(request: NextRequest, { params }: GetProps) {
     try {
-        const user = verifyToken(request);
 
-        if (user === null || user.isAdmin === false) {
-            return NextResponse.json(
-                { message: "only Admin can Get All Blog" },
-                { status: 403 }
-            )
-        }
         const pet = await prisma.pets.findUnique({ where: { id: parseInt(params.petId) } })
 
         if (!pet) {
