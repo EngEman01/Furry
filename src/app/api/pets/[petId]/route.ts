@@ -113,7 +113,12 @@ export async function DELETE(request: NextRequest, { params }: GetProps) {
                 { status: 403 }
             )
         }
-        const pet = await prisma.pets.findUnique({ where: { id: parseInt(params.petId) } })
+        const pet = await prisma.pets.findUnique({
+             where: { id: parseInt(params.petId) } ,
+             include: {
+                blogs: true // Include blogs to check if there are any associated blogs
+             }
+            })
 
         if (!pet) {
             return NextResponse.json({ message: "pet not found" }, { status: 404 })
@@ -121,12 +126,17 @@ export async function DELETE(request: NextRequest, { params }: GetProps) {
 
         await prisma.pets.delete({ where: { id: parseInt(params.petId) } })
 
+        const blogsIDs : number []= pet?.blogs.map(blog => blog.id);
+        await prisma.blog.deleteMany({
+            where: { id: { in: blogsIDs } }
+        })
+
         return NextResponse.json({ message: "Pet Deleted" }, { status: 200 })
 
     }
     catch (error) {
         return NextResponse.json(
-            { message: 'internal server error', error: String(error) },
+            { message: 'internal server error', error },
             { status: 500 }
         )
     }

@@ -42,5 +42,5 @@ model Blog {
   petId       Int
 
   //one to many relation between Pets & Blog
-  pet Pets @relation(fields: [petId], references: [id])
+  pet Pets @relation(fields: [petId], references: [id], onDelete: Cascade)
 }

@@ -1,12 +1,19 @@
 "use client";
 
 import React, { useState, useEffect } from 'react'
-import { pet } from '@/utils/types';
+import { Pets } from '@/generated/prisma/client';
 import { MdOutlinePets } from "react-icons/md";
 import Link from 'next/link';
+import page from '@/app/pets/page';
 
-const AllPetsCard = () => {
-    const [petList, setPetList] = useState<pet[]>([]);
+
+interface petsPageProps {
+    searchParams : { pageNumber: string }
+}
+
+const AllPetsCard = ({searchParams} : petsPageProps) => {
+    const { pageNumber } = searchParams;
+    const [petList, setPetList] = useState<Pets[]>([]);
     // Store count per pet id
     const [counts, setCounts] = useState<{ [id: number]: number }>({});
 
@@ -19,11 +26,11 @@ const AllPetsCard = () => {
 
     useEffect(() => {
         const fetchPets = async () => {
-            const response = await fetch('http://localhost:3000/api/pets');
+            const response = await fetch(`http://localhost:3000/api/pets?pageNumber=${pageNumber}`);
             if (!response.ok) {
                 throw new Error('Failed to fetch data');
             }
-            const Pets: pet[] = await response.json();
+            const Pets: Pets[] = await response.json();
             setPetList(Pets);
         };
         fetchPets();
