@@ -2,7 +2,7 @@ import { JWTPayload } from "@/utils/types";
 import jwt from 'jsonwebtoken';
 import { NextRequest, NextResponse } from "next/server";
 
-
+// virefy if token exist in cookies or not
 export function verifyToken(request: NextRequest): JWTPayload | null {
 
     try {

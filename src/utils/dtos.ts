@@ -46,8 +46,7 @@ export interface UpdateUsers {
     username?:string,
     phone?:string,
     email?:string,
-    password?:string,
-    isAdmin?:boolean
+    password?:string
 }
 
 //Login to USer

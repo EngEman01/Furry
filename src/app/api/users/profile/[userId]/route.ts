@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import prisma from '@/utils/db';
 import { UpdateUsers } from "@/utils/dtos";
 import { verifyToken } from "@/utils/verifyToken";
+import bcrypt from "bcryptjs";
 
 
 
@@ -11,16 +12,25 @@ interface GetParams {
 
 /***
  * @method GET
- * @route  ~/api/users/:id
+ * @route  ~/api/users/profile/:id
  * @des    Get User by ID
- * @access public
+ * @access private (only the user himself can open his profile)
 */
 
 export async function GET(request: NextRequest, { params }: GetParams) {
     try {
 
         const user = await prisma.user.findUnique(
-            { where: { id: parseInt(params.userId) } }
+            {
+                where: { id: parseInt(params.userId) },
+                select: {
+                    id: true,
+                    username: true,
+                    phone: true,
+                    email: true,
+                    isAdmin: true,
+                }
+            }
         )
 
         if (!user) {
@@ -30,8 +40,16 @@ export async function GET(request: NextRequest, { params }: GetParams) {
             )
         }
 
-        return NextResponse.json(user, { status: 200 })
+        const userFromToken = verifyToken(request);
 
+        if (userFromToken !== null && userFromToken.id !== user.id) {
+            return NextResponse.json(
+                { mesaage: "you are not allowed, you can only access your own profile" },
+                { status: 403 }
+            )
+
+        }
+        return NextResponse.json(user, { status: 200 })
     }
     catch (error) {
         return NextResponse.json(
@@ -44,9 +62,9 @@ export async function GET(request: NextRequest, { params }: GetParams) {
 
 /***
  * @method PUT
- * @route  ~/api/users/:id
+ * @route  ~/api/users/profile/:id
  * @des    Update User by ID
- * @access public
+ * @access private (only the user himself can open his profile)
 */
 
 export async function PUT(request: NextRequest, { params }: GetParams) {
@@ -61,9 +79,23 @@ export async function PUT(request: NextRequest, { params }: GetParams) {
             )
         }
 
+        const userFromToken = verifyToken(request);
+
+        if (userFromToken !== null && userFromToken.id !== user.id) {
+            return NextResponse.json(
+                { message: "you are not allowed, you can only update your own profile" },
+                { status: 403 }
+            )
+        }
+
         const body = (await request.json()) as UpdateUsers;
 
-        const NewUser = await prisma.user.update({
+        if (body.password) {
+            const salt = await bcrypt.genSalt(10);
+            body.password = await bcrypt.hash(body.password, salt);
+        }
+
+        const updatedUser = await prisma.user.update({
 
             where: { id: parseInt(params.userId) },
 
@@ -71,12 +103,18 @@ export async function PUT(request: NextRequest, { params }: GetParams) {
                 username: body.username,
                 phone: body.phone,
                 email: body.email,
-                password: body.password,
-                isAdmin: body.isAdmin
+                password: body.password
+            },
+            select:{
+                id: true,
+                username: true,
+                phone: true,
+                email: true,
+                isAdmin: true,
             }
         })
 
-        return NextResponse.json(NewUser, { status: 200 })
+        return NextResponse.json(updatedUser, { status: 200 })
 
     }
 
@@ -92,12 +130,12 @@ export async function PUT(request: NextRequest, { params }: GetParams) {
 
 /***
  * @method DELETE
- * @route  ~/api/users/:id
+ * @route  ~/api/users/profile/:id
  * @des    Delete User's Profile
- * @access private
+ * @access private (only the user himself can delete his profile)
 */
 
-export async function DELETE(request: NextRequest, { params }: GetParams){
+export async function DELETE(request: NextRequest, { params }: GetParams) {
     try {
 
         const user = await prisma.user.findUnique({ where: { id: parseInt(params.userId) } })
@@ -112,11 +150,11 @@ export async function DELETE(request: NextRequest, { params }: GetParams){
         // get data manual from request header
         // const authToken = request.headers.get('authToken') as string;
 
-   
+
         const userFromToken = verifyToken(request);
 
         if (userFromToken !== null && userFromToken.id === user.id) {
-            await prisma.user.delete({ where: { id: parseInt(params.userId) }});
+            await prisma.user.delete({ where: { id: parseInt(params.userId) } });
 
             return NextResponse.json(
                 { message: 'user deleted successfully' },
