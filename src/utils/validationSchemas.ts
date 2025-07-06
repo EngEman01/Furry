@@ -7,7 +7,7 @@ export const createPetsSchema = z.object({
         invalid_type_error: "Name must be a string"
     }).min(2).max(200),
     type: z.string().min(2).max(100),
-    image: z.string().min(2).max(200),
+    image: z.string().min(2).max(300),
     description: z.string().min(2),
     price: z.number().min(1),
     freeDelivery: z.boolean(),

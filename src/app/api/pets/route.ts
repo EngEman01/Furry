@@ -4,17 +4,23 @@ import { createPetsSchema } from '@/utils/validationSchemas'
 import prisma from '@/utils/db'
 import { Pets } from '@/generated/prisma';
 import { verifyToken } from '@/utils/verifyToken';
+import { PET_PRE_PAGE } from '@/utils/constants';
 
 /***
  * @method GET
  * @route  ~/api/pets
- * @des    Get All Pets
+ * @des    Get Pets by pageNumber
  * @access public
 */
 
 export async function GET(request: NextRequest) {
     try {
-        const pets = await prisma.pets.findMany();
+        const pageNumber = request.nextUrl.searchParams.get('pageNumber') || '1';
+        
+        const pets = await prisma.pets.findMany({
+            skip: PET_PRE_PAGE * (parseInt(pageNumber) - 1),
+            take: PET_PRE_PAGE ,
+        });
         return NextResponse.json(pets, { status: 200 });
     } catch (error) {
         console.error('GET /api/pets error:', error);
@@ -24,6 +30,26 @@ export async function GET(request: NextRequest) {
         );
     }
 }
+
+// /***
+//  * @method GET
+//  * @route  ~/api/pets
+//  * @des    Get All Pets
+//  * @access public
+// */
+
+// export async function GET(request: NextRequest) {
+//     try {
+//         const pets = await prisma.pets.findMany();
+//         return NextResponse.json(pets, { status: 200 });
+//     } catch (error) {
+//         console.error('GET /api/pets error:', error);
+//         return NextResponse.json(
+//             { message: "internal server error", error: String(error) },
+//             { status: 500 }
+//         );
+//     }
+// }
 
 /***
  * @method POST

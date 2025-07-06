@@ -36,7 +36,7 @@ const Navbar = () => {
                     <ul className='flex justify-between items-center max-w-6xl'>
                         <li className='mx-4 text-gray-500'><Link href="/">Home</Link></li>
                         <li className='mx-4 text-gray-500'><Link href="/about">About</Link></li>
-                        <li className='mx-4 text-gray-500'><Link href="/pets">All Products</Link></li>
+                        <li className='mx-4 text-gray-500'><Link href="/pets?pageNumber=1">All Products</Link></li>
                         <li className='mx-4 text-gray-500'><Link href="/free-dlivery">Free Delivery</Link></li>
                         <li className='mx-4 text-gray-500'><Link href="/blog">Blog</Link></li>
                         {/* <li className='mx-4 text-gray-500'><Link href="/shop">Shop</Link></li> */}
