@@ -2,15 +2,27 @@ import React from 'react'
 import NavSaller from '@/components/Best Saller/navSaller';
 import AllPetsCards from '@/components/AllPetsCards';
 import Pagination from './Pagination'
+import { Pets } from '@/generated/prisma';
+import { getPets, getPetsCount } from '@/APICalls/petsApiCall';
+import { PET_PRE_PAGE } from '@/utils/constants';
 
 
 
-const page = async () => {
+interface petsPageProps {
+  searchParams: { pageNumber: string }
+}
 
 
 
-  // await new Promise((resolve) => setTimeout(resolve, 5000))
+const page = async ({ searchParams }: petsPageProps) => {
 
+  const { pageNumber } = searchParams;
+
+  const Pets: Pets[] = await getPets(pageNumber);
+
+  const count = await getPetsCount();
+
+  const pages = Math.ceil(count / PET_PRE_PAGE);
 
   return (
     <>
@@ -28,11 +40,12 @@ const page = async () => {
           </div>
 
           <div className="cards grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" style={{ width: '80%' }}>
-
-            <AllPetsCards />
+            {Pets.map(pet => (
+              <AllPetsCards pets={pet} key={pet.id} />
+            ))}
           </div>
 
-          <Pagination />
+          <Pagination pages={pages} pageNumber={ parseInt(pageNumber) } route='pets'/>
         </div>
       </div>
     </>
