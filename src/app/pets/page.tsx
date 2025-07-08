@@ -1,6 +1,6 @@
 import React from 'react'
 import NavSaller from '@/components/Best Saller/navSaller';
-import AllPetsCards from '@/components/AllPetsCards';
+import AllPetsCards from '@/components/Pets/AllPetsCards';
 import Pagination from './Pagination'
 import { Pets } from '@/generated/prisma';
 import { getPets, getPetsCount } from '@/APICalls/petsApiCall';

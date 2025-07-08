@@ -1,20 +1,17 @@
 'use client'
 
 import React, { useState } from 'react'
+import { useRouter } from 'next/navigation';
 
 const SearchBar = () => {
 
-
-    const [text, setText] = useState('');
+    const router = useRouter();
+    const [searchText, setText] = useState('');
 
     const FormLoginSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-
-
-        console.log('search text:', text);
-
-
-
+        router.push(`/pets/search?searchText=${searchText}`)
+        console.log('search text:', searchText);
     }
 
 
@@ -22,13 +19,13 @@ const SearchBar = () => {
         <>
             <form className='flex flex-col gap-4' onSubmit={FormLoginSubmit}>
                 <input
-                    type="text"
-                    placeholder='Search for more than 20,000 products'
+                    type="search"
+                    placeholder='Search for more than 20,000 pets'
                     className='w-full h-12 p-4 bg-gray-200 rounded-lg'
-                    value={text}
+                    value={searchText}
                     onChange={(e) => setText(e.target.value)}
                 />
-          
+
             </form>
         </>
     )

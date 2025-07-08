@@ -5,7 +5,7 @@ import { FaRegUserCircle } from 'react-icons/fa';
 import { FaBasketShopping } from "react-icons/fa6";
 import ModalLogin from './auth/modalLogin'; // Assuming you have a ModalLogin component
 import Link from 'next/link';
-import SearchBar from './Search/SearchBar'
+import SearchBar from './Pets/SearchBar'
 
 const Navbar = () => {
 

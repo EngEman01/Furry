@@ -28,3 +28,15 @@ export async function getPetsCount(): Promise<number> {
 
   return count
 }
+
+//Get Pets based on searchText
+export async function getPetsBasedOnSearch(searchText: string): Promise<Pets[]> {
+
+  const response = await fetch(`http://localhost:3000/api/pets/search?searchText=${searchText}`);
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch data');
+  }
+
+  return response.json();
+}
