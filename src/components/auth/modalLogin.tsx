@@ -1,26 +1,37 @@
 'use client'
 
-
 import Link from 'next/link';
 import React, { useState } from 'react'
 import { FaRegUserCircle } from "react-icons/fa";
 import { toast } from 'react-toastify';
+import { useRouter } from 'next/navigation';
+import axios from 'axios';
+import { DOMAIN } from '@/utils/constants';
+
+
 
 const modalLogin = () => {
-
+    const router = useRouter();
     const [showModal, setShowModal] = useState(false);
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const FormLoginSubmit = (e: React.FormEvent) => {
+    const FormLoginSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
         if (email == '') return toast.error('Email is required');
         if (password == '') return toast.error('Password is required');
 
-        console.log('Email:', email);
-        console.log('Password:', password);
+        try {
+            await axios.post(`${DOMAIN}/api/users/login` , { email , password })
+            router.replace('/')
+            router.refresh()
+
+        } catch (error : any) {
+            toast.error(error?.response?.data.message)
+            console.log(error)
+        }
 
         setShowModal(false);
 
@@ -30,7 +41,7 @@ const modalLogin = () => {
     return (
         <>
 
-            <div style={{ width: 30, height: 30, display: 'inline-block', cursor:'pointer' }} onClick={() => setShowModal(true)}>
+            <div style={{ width: 30, height: 30, display: 'inline-block', cursor: 'pointer' }} onClick={() => setShowModal(true)}>
                 <FaRegUserCircle
                     size={30}
                     className="custom-basket-icon"
@@ -44,7 +55,7 @@ const modalLogin = () => {
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
                     <div className="bg-white rounded-lg shadow-lg max-w-lg w-full">
                         <div className="flex items-center justify-between p-4 border-b rounded-t">
-                            <h3  className='text-5xl mb-6 text-[#76accd]' style={{ fontFamily: '"Chewy", system-ui' }}>Login</h3>
+                            <h3 className='text-5xl mb-6 text-[#76accd]' style={{ fontFamily: '"Chewy", system-ui' }}>Login</h3>
                             <button
                                 type="button"
                                 className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 flex justify-center items-center"
@@ -91,16 +102,16 @@ const modalLogin = () => {
                                 href="/register"
                                 className="text-blue-600 cursor-pointer hover:underline"
                             >
-                                   <button
+                                <button
                                     type="button"
                                     className="text-blue-800 focus:ring-4 cursor-pointer focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5 text-center mr-2"
                                     onClick={() => setShowModal(false)}
                                 >
-                                   Create Account?
+                                    Create Account?
                                 </button>
-                                
+
                             </Link>
-                            
+
                         </div>
                     </div>
                 </div>

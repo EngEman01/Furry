@@ -1,14 +1,19 @@
-
 import Image from 'next/image';
 import React from 'react';
-import { FaRegUserCircle } from 'react-icons/fa';
 import { FaBasketShopping } from "react-icons/fa6";
-import ModalLogin from './auth/modalLogin'; // Assuming you have a ModalLogin component
+import ModalLogin from './auth/modalLogin';
+import { IoLogOut } from "react-icons/io5";
 import Link from 'next/link';
 import SearchBar from './Pets/SearchBar'
+import { cookies } from 'next/headers';
+import { verifyTokenForPage } from '@/utils/verifyToken';
+import ModalLogout from '@/components/auth/modalLogout'
 
-const Navbar = () => {
-
+const Navbar = async () => {
+    //Get Cookies form Header
+    const cookieStore = await cookies();
+    const token = cookieStore.get('jwtToken')?.value || "";
+    const payload = verifyTokenForPage(token);
 
     return (
         <>
@@ -16,22 +21,35 @@ const Navbar = () => {
                 <div className='w-full bg-white flex justify-between items-center p-4'>
                     <div className='logoSection w-full flex justify-center items-center'>
                         <Link href="/">
-                        <Image src="/logo.svg" alt="furry logo" width={200} height={200} />   
-                        </Link>             </div>
-                    <div className='searchSection w-full'>
-                        {/* <input type="text" placeholder='Search for more than 20,000 products' className='w-full h-12 p-4 bg-gray-200 rounded-lg' /> */}
-                        <SearchBar/>
+                            <Image
+                                src="/logo.svg"
+                                alt="furry logo"
+                                width={200}
+                                height={200}
+                                style={{ width: "100%", height: "auto" }}
+                            />
+                        </Link>
                     </div>
-                    <div className='userNeed w-full flex justify-center items-center text-[#76accd]'>
-                        {/* <FaRegUserCircle className='inline mx-2' size={30} /> */}
-                        <ModalLogin />
-                        <FaBasketShopping className='inline mx-2' size={30} />
+                    <div className='searchSection w-full'>
+                        <SearchBar />
+                    </div>
+                    <div className='userNeed w-full flex justify-center items-center text-[#76accd] gap-4'>
+                        {payload ? (
+                            <>
+                                <h1 className='text-2xl capitalize'>{payload?.username}</h1>
+                                <ModalLogout />
+                            </>
+                        ) : (
+                            <>
+                                <ModalLogin />
+                                <FaBasketShopping className='inline mx-2' size={30} />
+                            </>
+                        )}
                     </div>
 
 
                 </div>
 
-                {/* Navigation Links */}
                 <div className='w-full bg-white flex justify-center items-center p-2'>
                     <ul className='flex justify-between items-center max-w-6xl'>
                         <li className='mx-4 text-gray-500'><Link href="/">Home</Link></li>

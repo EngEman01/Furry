@@ -22,3 +22,21 @@ export function verifyToken(request: NextRequest): JWTPayload | null {
         return null;
     }
 }
+
+// virefy token for page
+export function verifyTokenForPage(token : string): JWTPayload | null {
+
+    try {
+
+        const JWTSecret = process.env.JWT_SECRET as string;
+
+        const userPayload = jwt.verify(token, JWTSecret) as JWTPayload;
+        if(!userPayload) return null;
+
+        return userPayload;
+
+    }
+    catch (error) {
+        return null;
+    }
+}

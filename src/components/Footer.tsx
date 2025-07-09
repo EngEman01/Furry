@@ -12,7 +12,13 @@ const Footer = () => {
                 <div className='w-full flex justify-around items-start p-10 gap-6 flex-col sm:flex-col md:flex-row'>
 
                     <div className='furry-logo w-full'>
-                        <Image src="/logo.svg" alt="furry logo" width={160} height={160} className='cursor-pointer'/>
+                        <Image
+                            src="/logo.svg"
+                            alt="furry logo"
+                            width={200}
+                            height={200}
+                            style={{ width: "100%", height: "auto" }}
+                        />
                         <div className="social-links mt-5 ml-2 flex items-center justify-start">
                             <FaFacebookF className='text-gray-500 text-3xl mr-2 cursor-pointer' />
                             <FaTwitter className='text-gray-500 text-3xl mr-2 cursor-pointer' />
