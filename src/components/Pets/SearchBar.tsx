@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react'
 import { useRouter } from 'next/navigation';
+import { toast } from 'react-toastify';
 
 const SearchBar = () => {
 
@@ -10,6 +11,7 @@ const SearchBar = () => {
 
     const FormLoginSubmit = (e: React.FormEvent) => {
         e.preventDefault();
+        if (searchText == '') return toast.info('Put text to Make Search');
         router.push(`/pets/search?searchText=${searchText}`)
         console.log('search text:', searchText);
     }

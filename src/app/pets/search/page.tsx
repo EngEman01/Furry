@@ -12,15 +12,27 @@ const searchPage = async ({ searchParams: { searchText } }: SearchPage) => {
 
     return (
         <>
-            <h1>  Pets based on   </h1>
+            {pets.length === 0 ? (
+                <>
+                    <div className="flex items-center justify-center gap-3">
+                        <h1> Pets based on </h1>
 
-            <span className="text-green">{searchText}</span>
+                        <span className="text-red-500 "> {searchText} </span>
+                        <h1>not found </h1>
+                    </div>
+                </>
+            ) : (
+                <>
+                    <h1>  Pets based on   </h1>
 
-            <div className="cards grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-20">
-                {pets.map(pet => (
-                    <AllPetsCards pets={pet} key={pet.id} />
-                ))}
-            </div>
+                    <span className="text-green-500 ">{searchText}</span>
+
+                    <div className="cards grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-20">
+                        {pets.map(pet => (
+                            <AllPetsCards pets={pet} key={pet.id} />
+                        ))}
+                    </div></>
+            )}
         </>
     )
 }
