@@ -10,32 +10,7 @@ interface PetsProps {
     pets: Pets
 }
 
-
-// const AllPetsCard = async  ({ searchParams }: petsPageProps) => {
 const AllPetsCard = ({ pets }: PetsProps) => {
-   
-    // const [petList, setPetList] = useState<Pets[]>([]);
-    // // Store count per pet id
-    // const [counts, setCounts] = useState<{ [id: number]: number }>({});
-
-    // const handleAddToPets = (id: number) => {
-    //     setCounts(prev => ({ ...prev, [id]: (prev[id] || 0) + 1 }));
-    // };
-    // const handleMinusToPets = (id: number) => {
-    //     setCounts(prev => ({ ...prev, [id]: Math.max((prev[id] || 0) - 1, 0) }));
-    // };
-
-    // useEffect(() => {
-    //     const fetchPets = async () => {
-    //         const response = await fetch(`http://localhost:3000/api/pets?pageNumber=${pageNumber}`);
-    //         if (!response.ok) {
-    //             throw new Error('Failed to fetch data');
-    //         }
-    //         const Pets: Pets[] = await response.json();
-    //         setPetList(Pets);
-    //     };
-    //     fetchPets();
-    // }, []);
 
     return (
         <>

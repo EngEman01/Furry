@@ -1,6 +1,20 @@
 import { Pets } from '@/generated/prisma';
 
 
+//Get All Pets
+export async function getAllPets() {
+
+  const response = await fetch(`http://localhost:3000/api/pets/all`)
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch data');
+  }
+
+  return response.json();
+
+}
+
+
 //Get Pets based on pageNumber
 export async function getPets(pageNumber: string | undefined): Promise<Pets[]> {
   // Default to page 1 if pageNumber is missing or invalid
@@ -24,7 +38,7 @@ export async function getPetsCount(): Promise<number> {
     throw new Error('Failed to get Pets Count');
   }
 
-  const {count} = await response.json() as {count:number};
+  const { count } = await response.json() as { count: number };
 
   return count
 }

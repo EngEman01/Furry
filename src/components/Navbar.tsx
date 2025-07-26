@@ -59,7 +59,7 @@ const Navbar = async () => {
                         <li className='mx-4 text-gray-500'><Link href="/blog">Blog</Link></li>
                         {/* <li className='mx-4 text-gray-500'><Link href="/shop">Shop</Link></li> */}
                         <li className='mx-4 text-gray-500'><Link href="/offers">Offers</Link></li>
-                        <li className='mx-4 text-red-500'><Link href="/get-pro">Get PRO</Link></li>
+                        {/* <li className='mx-4 text-red-500'><Link href="/get-pro">Get PRO</Link></li> */}
                         <li className='mx-4 text-red-500'><Link href="/adminDashboard">Admin Dashboard</Link></li>
                     </ul>
                 </div>
